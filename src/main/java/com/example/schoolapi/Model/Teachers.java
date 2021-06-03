@@ -3,7 +3,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -26,10 +25,17 @@ public class Teachers {
     private String sect;
     private Date dob;
     private String gender;
-    @ManyToOne//( cascade = CascadeType.ALL)
+    @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
     //@JsonBackReference
     private Department department;
 
+    public Teachers(int teacher_id, String teacher_name, String sect, Date dob, String gender) {
+        this.teacher_id = teacher_id;
+        this.teacher_name = teacher_name;
+        this.sect = sect;
+        this.dob = dob;
+        this.gender = gender;
+    }
 }
 

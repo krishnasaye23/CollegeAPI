@@ -1,5 +1,6 @@
 package com.example.schoolapi.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,13 +25,21 @@ public class Students {
     // @Pattern(regexp="^[a-z][A-Z][0-9]",message="should not contain special characters")
     //@Pattern(regexp = )
     private String student_name;
-    private String batch;  //year
+    private int batch;  //year
     private String sect;
     private Date dob;
     private String gender;
-    @ManyToOne//( cascade = CascadeType.ALL)
+    @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
-    //@JsonBackReference
+    @JsonBackReference
     private Department department;
 
+    public Students(int student_id, String student_name, int batch, String sect, Date dob, String gender) {
+        this.student_id = student_id;
+        this.student_name = student_name;
+        this.batch = batch;
+        this.sect = sect;
+        this.dob = dob;
+        this.gender = gender;
+    }
 }
