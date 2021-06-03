@@ -10,7 +10,7 @@ CREATE TABLE if not exists Students
 (
     student_id integer NOT NULL,
     student_name varchar(25),
-    batch varchar(10),
+    batch int,
     sect varchar(20),
     dob date,
     gender varchar(10),
