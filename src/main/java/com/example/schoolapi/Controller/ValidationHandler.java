@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.HashMap;
 import java.util.Map;
 @ControllerAdvice
-public class StudentValidationHandler extends ResponseEntityExceptionHandler {
+public class ValidationHandler extends ResponseEntityExceptionHandler {
 
         @Override
         protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,

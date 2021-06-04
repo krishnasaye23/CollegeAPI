@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,18 +19,18 @@ public class StudentsCont {
         List<Students> mo=studentsImpl.getStudents();
         return new ResponseEntity<>(mo, HttpStatus.OK);
     }
-    @GetMapping("/movies/{movie_id}")
+    @GetMapping("/students/{student_id}")
     public ResponseEntity<Students> getbyid(@PathVariable int student_id){
         Students response=studentsImpl.getStudentbyid(student_id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @PostMapping("/students/add")
-    public ResponseEntity<Students> addStudents(@RequestBody Students students) {
+    public ResponseEntity<Students> addStudents(@Valid @RequestBody Students students) {
         Students response=studentsImpl.addStudents(students);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
     @PutMapping("/students/add")
-    public ResponseEntity<Students> updateStudents(@RequestBody Students students){
+    public ResponseEntity<Students> updateStudents(@Valid @RequestBody Students students){
        Students response = studentsImpl.updateStudents(students);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }

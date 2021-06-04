@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,12 +25,12 @@ public class TeachersCont {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @PostMapping("/teachers/add")
-    public ResponseEntity<Teachers> addTeachers(@RequestBody Teachers teachers) {
+    public ResponseEntity<Teachers> addTeachers(@Valid @RequestBody Teachers teachers) {
         Teachers response=teachersImpl.addTeachers(teachers);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
     @PutMapping("/teachers/add")
-    public ResponseEntity<Teachers> updateTeachers(@RequestBody Teachers teachers) {
+    public ResponseEntity<Teachers> updateTeachers(@Valid @RequestBody Teachers teachers) {
         Teachers response=teachersImpl.updateTeachers(teachers);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
