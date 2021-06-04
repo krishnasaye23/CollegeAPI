@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,10 +31,15 @@ public class Students {
     private String sect;
     private Date dob;
     private String gender;
-    @ManyToOne( cascade = CascadeType.ALL)
-    @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
-    @JsonBackReference
-    private Department department;
+   // private DateTime addedon;
+   @ManyToOne( cascade = CascadeType.PERSIST)
+   @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
+   @JsonBackReference(value = "department")
+   private Department department;
+   @ManyToOne( cascade = CascadeType.PERSIST)
+   @JoinColumn(name = "Club_id",referencedColumnName = "club_id")
+   @JsonBackReference(value="club")
+   private Clubs clubs;
 
     public Students(int student_id, String student_name, int batch, String sect, Date dob, String gender) {
         this.student_id = student_id;
