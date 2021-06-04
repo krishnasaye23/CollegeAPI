@@ -1,11 +1,20 @@
 CREATE TABLE if not exists department
 (
-    dept_id varchar(15) NOT NULL PRIMARY KEY,
+    dept_id integer NOT NULL PRIMARY KEY,
     dept_name varchar(25) NOT NULL,
     hod varchar(25),
     FOREIGN KEY (Student_id) REFERENCES Students(student_id),
     FOREIGN KEY (Teacher_id) REFERENCES Teachers(teacher_id)
 );
+CREATE TABLE if not exists clubs
+(
+    club_id integer NOT NULL PRIMARY KEY,
+    club_name varchar(25) NOT NULL,
+    president varchar(25),
+    vice_president varchar(25),
+    about varchar(100),
+    FOREIGN KEY (Student_id) REFERENCES Students(student_id)
+    );
 CREATE TABLE if not exists Students
 (
     student_id integer NOT NULL,
