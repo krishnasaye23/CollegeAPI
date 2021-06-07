@@ -39,5 +39,4 @@ public class DepartmentCont {
         Department response = departmentsImpl.delrecord(dept_id);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
-
 }
