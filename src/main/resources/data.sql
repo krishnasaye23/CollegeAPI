@@ -4,7 +4,8 @@ CREATE TABLE if not exists department
     dept_name varchar(25) NOT NULL,
     hod varchar(25),
     FOREIGN KEY (Student_id) REFERENCES Students(student_id),
-    FOREIGN KEY (Teacher_id) REFERENCES Teachers(teacher_id)
+    FOREIGN KEY (Teacher_id) REFERENCES Teachers(teacher_id),
+    FOREIGN KEY (Asc_id) REFERENCES Dept_Association(asc_id)
 );
 CREATE TABLE if not exists clubs
 (
@@ -13,6 +14,16 @@ CREATE TABLE if not exists clubs
     president varchar(25),
     vice_president varchar(25),
     about varchar(100),
+    FOREIGN KEY (Student_id) REFERENCES Students(student_id)
+    );
+CREATE TABLE if not exists dept_association
+(
+    asc_id integer NOT NULL PRIMARY KEY,
+    asc_name varchar(50) NOT NULL,
+    president varchar(25),
+    vice_president varchar(25),
+    Dept_id integer not null,
+    FOREIGN KEY (Dept_id) REFERENCES Department(dept_id),
     FOREIGN KEY (Student_id) REFERENCES Students(student_id)
     );
 CREATE TABLE if not exists Students
@@ -24,8 +35,12 @@ CREATE TABLE if not exists Students
     dob date,
     gender varchar(10),
     Dept_id integer not null,
+    Club_id integer,
+    Asc_id integer,
     CONSTRAINT Students PRIMARY KEY (student_id),
-    FOREIGN KEY (Dept_id) REFERENCES department(dept_id)
+    FOREIGN KEY (Dept_id) REFERENCES department(dept_id),
+    FOREIGN KEY (Club_id) REFERENCES department(club_id),
+    FOREIGN KEY (Asc_id) REFERENCES department(asc_id)
 );
 CREATE TABLE if not exists Teachers
 (
