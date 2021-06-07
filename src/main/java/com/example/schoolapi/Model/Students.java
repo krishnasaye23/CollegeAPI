@@ -5,12 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 
 @NoArgsConstructor
@@ -31,7 +30,14 @@ public class Students {
     private String sect;
     private Date dob;
     private String gender;
-   // private DateTime addedon;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date lastupdatedon;
+    @PrePersist
+    private void onCreate(){
+        lastupdatedon=new Date();
+    }
+
    @ManyToOne( cascade = CascadeType.PERSIST)
    @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
    @JsonBackReference(value = "department")
@@ -40,13 +46,20 @@ public class Students {
    @JoinColumn(name = "Club_id",referencedColumnName = "club_id")
    @JsonBackReference(value="club")
    private Clubs clubs;
+    @ManyToOne( cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "Asc_id",referencedColumnName = "asc_id")
+    @JsonBackReference(value="dept_association")
+    private Dept_Association dept_association;
 
-    public Students(int student_id, String student_name, int batch, String sect, Date dob, String gender) {
+
+    public Students(int student_id, String student_name, int batch, String sect, Date dob, String gender,Date lastupdatedon) {
         this.student_id = student_id;
         this.student_name = student_name;
         this.batch = batch;
         this.sect = sect;
         this.dob = dob;
         this.gender = gender;
+        this.lastupdatedon=lastupdatedon;
     }
+
 }

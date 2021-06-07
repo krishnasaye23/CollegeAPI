@@ -24,6 +24,13 @@ public class Clubs {
     private String president;
     private String vice_president;
     private String about;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private java.util.Date lastupdatedon;
+    @PrePersist
+    private void onCreate(){
+        lastupdatedon=new java.util.Date();
+    }
     @OneToMany(mappedBy = "clubs",cascade = CascadeType.PERSIST,targetEntity = Students.class)
     @JsonManagedReference(value = "club")
     private List<Students> members;

@@ -25,6 +25,13 @@ public class Teachers {
     private String sect;
     private Date dob;
     private String gender;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private java.util.Date lastupdatedon;
+    @PrePersist
+    private void onCreate(){
+        lastupdatedon=new java.util.Date();
+    }
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
     //@JsonBackReference
