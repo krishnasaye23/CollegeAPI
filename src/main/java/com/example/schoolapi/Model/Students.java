@@ -10,14 +10,13 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.sql.Timestamp;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "Students")
+@Table(name = "students")
 public class Students {
     @Id
     @Min(value = 300)
@@ -50,6 +49,9 @@ public class Students {
     @JoinColumn(name = "Asc_id",referencedColumnName = "asc_id")
     @JsonBackReference(value="dept_association")
     private Dept_Association dept_association;
+    @OneToOne(mappedBy = "students",cascade = CascadeType.PERSIST,targetEntity = StudentsDetails.class)
+    //@JsonManagedReference(value = "studentsdetails")
+    private StudentsDetails students_details;
 
 
     public Students(int student_id, String student_name, int batch, String sect, Date dob, String gender,Date lastupdatedon) {
