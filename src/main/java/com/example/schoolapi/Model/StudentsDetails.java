@@ -19,10 +19,9 @@ public class StudentsDetails {
     private String mother_name;
     private String email;
     private double cgpa;
-    private long contact_no;
+    private String contact_no;
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "student_id",referencedColumnName = "student_id")
-    @MapsId
+    @PrimaryKeyJoinColumn
     //@JsonBackReference(value="studentsdetails")
     private Students students;
 }
