@@ -1,7 +1,7 @@
 package com.example.schoolapi.Controller;
 
 import com.example.schoolapi.Model.Clubs;
-import com.example.schoolapi.Service.ClubsServImpl;
+import com.example.schoolapi.Service.ClubsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,18 +11,30 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class ClubsCont {
+public class ClubsController {
     @Autowired
-    private ClubsServImpl clubsImpl;
+    private ClubsServiceImpl clubsImpl;
     @GetMapping("/clubs")
-    public ResponseEntity<List<Clubs>> getClub(){
-        List<Clubs> mo=clubsImpl.getClubs();
-        return new ResponseEntity<>(mo, HttpStatus.OK);
+    public ResponseEntity<Object> getClub(){
+        try {
+            List<Clubs> mo = clubsImpl.getClubs();
+            return new ResponseEntity<>(mo, HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("No records found",HttpStatus.NO_CONTENT);
+        }
     }
     @GetMapping("/clubs/{club_id}")
-    public ResponseEntity<Clubs> getbyid(@PathVariable int club_id){
-        Clubs response=clubsImpl.getClubsbyid(club_id);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+    public ResponseEntity<Object> getbyid(@PathVariable int club_id){
+        try {
+            Clubs response = clubsImpl.getClubsbyid(club_id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("Club not found with the id "+club_id,HttpStatus.BAD_REQUEST);
+        }
     }
     @GetMapping("/clubs/asc")
     public ResponseEntity<List<Clubs>> getClubAsc(){
@@ -40,9 +52,15 @@ public class ClubsCont {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @DeleteMapping("clubs")
-    public ResponseEntity<Clubs> delrecord(@RequestParam("club_id") int club_id){
-        Clubs response = clubsImpl.delrecord(club_id);
-        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    public ResponseEntity<Object> delrecord(@RequestParam("club_id") int club_id){
+        try {
+            Clubs response = clubsImpl.delrecord(club_id);
+            return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("Club not found with the id "+club_id,HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

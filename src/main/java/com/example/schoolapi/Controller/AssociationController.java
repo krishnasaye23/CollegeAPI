@@ -1,7 +1,7 @@
 package com.example.schoolapi.Controller;
 
 import com.example.schoolapi.Model.Dept_Association;
-import com.example.schoolapi.Service.AssociationsServImpl;
+import com.example.schoolapi.Service.AssociationsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +10,9 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class AssociationCont {
+public class AssociationController {
     @Autowired
-    private AssociationsServImpl associationsImpl;
+    private AssociationsServiceImpl associationsImpl;
     @GetMapping("/association")
     public ResponseEntity<List<Dept_Association>> getAssociation(){
         List<Dept_Association> mo=associationsImpl.getAssociation();

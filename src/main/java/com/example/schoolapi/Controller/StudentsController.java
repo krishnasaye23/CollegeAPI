@@ -2,8 +2,8 @@ package com.example.schoolapi.Controller;
 
 import com.example.schoolapi.Model.Students;
 import com.example.schoolapi.Model.StudentsDetails;
-import com.example.schoolapi.Service.StudentDetailsServImpl;
-import com.example.schoolapi.Service.StudentsServImpl;
+import com.example.schoolapi.Service.StudentDetailsServiceImpl;
+import com.example.schoolapi.Service.StudentsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,25 +13,45 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class StudentsCont {
+public class StudentsController {
     @Autowired
-    private StudentsServImpl studentsImpl;
+    private StudentsServiceImpl studentsImpl;
     @Autowired
-    private StudentDetailsServImpl studentDetailsImpl;
+    private StudentDetailsServiceImpl studentDetailsImpl;
     @GetMapping("/students")
-    public ResponseEntity<List<Students>> getStudents(){
-        List<Students> mo=studentsImpl.getStudents();
-        return new ResponseEntity<>(mo, HttpStatus.OK);
+    public ResponseEntity<Object> getStudents(){
+        try {
+            List<Students> mo = studentsImpl.getStudents();
+            return new ResponseEntity<>(mo, HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("No records found",HttpStatus.NO_CONTENT);
+        }
     }
     @GetMapping("/students/{student_id}")
-    public ResponseEntity<Students> getbyid(@PathVariable int student_id){
-        Students response=studentsImpl.getStudentbyid(student_id);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+    public ResponseEntity<Object> getbyid(@Valid @PathVariable int student_id){
+        Students response;
+        try {
+            response = studentsImpl.getStudentbyid(student_id);
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Student not found with the id "+student_id,HttpStatus.BAD_REQUEST);
+        }
+
     }
     @GetMapping("/students/boys")
-    public ResponseEntity<List<Students>> getBoys() {
-        List<Students> mo=studentsImpl.getBoys("male");
-        return new ResponseEntity<>(mo, HttpStatus.OK);
+    public ResponseEntity<Object> getBoys() {
+        List<Students> mo;
+        try {
+            mo = studentsImpl.getBoys("male");
+            return new ResponseEntity<>(mo, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("There are no boys in the record now",HttpStatus.BAD_REQUEST);
+        }
+
     }
     @PostMapping("/students")
     public ResponseEntity<Students> addStudents(@Valid @RequestBody Students students) {
@@ -43,21 +63,40 @@ public class StudentsCont {
        Students response = studentsImpl.updateStudents(students);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @DeleteMapping("students")
-    public ResponseEntity<Students> delrecord(@RequestParam("student_id") int student_id){
-        Students response = studentsImpl.delrecord(student_id);
-        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    @DeleteMapping("/students")
+    public ResponseEntity<Object> delrecord(@Valid @RequestParam("student_id") int student_id){
+        Students response;
+        try {
+            response = studentsImpl.delrecord(student_id);
+            return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Student not found with the id "+student_id,HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @GetMapping("/student_details")
-    public ResponseEntity<List<StudentsDetails>> getStudentDetails(){
-        List<StudentsDetails> mo=studentDetailsImpl.getStudentDetails();
-        return new ResponseEntity<>(mo, HttpStatus.OK);
+    public ResponseEntity<Object> getStudentDetails(){
+        try {
+            List<StudentsDetails> mo = studentDetailsImpl.getStudentDetails();
+            return new ResponseEntity<>(mo, HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("No records found",HttpStatus.NO_CONTENT);
+        }
     }
     @GetMapping("/student_details/{student_id}")
-    public ResponseEntity<StudentsDetails> getdetailsbyid(@PathVariable int student_id){
-        StudentsDetails response= studentDetailsImpl.getStudentDetailsbyid(student_id);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+    public ResponseEntity<Object> getdetailsbyid(@Valid @PathVariable int student_id){
+        try {
+            StudentsDetails response = studentDetailsImpl.getStudentDetailsbyid(student_id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("Student details not found with the id"+student_id,HttpStatus.BAD_REQUEST);
+        }
     }
     @PostMapping("/student_details")
     public ResponseEntity<StudentsDetails> addStudentDetails(@Valid @RequestBody StudentsDetails studentsDetails) {
