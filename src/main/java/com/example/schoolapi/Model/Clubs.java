@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,6 +19,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name="clubs")
+@NamedNativeQuery(name="Clubs.getClubsOrderedAscending",query = "select * from clubs order by club_name ASC ",resultClass = Clubs.class)
 public class Clubs {
     @Id
     private int club_id;
@@ -24,13 +28,12 @@ public class Clubs {
     private String president;
     private String vice_president;
     private String about;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false,updatable=false)
+    @CreationTimestamp
+    private Instant createdon;
     @Column(nullable = false)
-    private java.util.Date lastupdatedon;
-    @PrePersist
-    private void onCreate(){
-        lastupdatedon=new java.util.Date();
-    }
+    @UpdateTimestamp
+    private Instant lastupdatedon;
     @OneToMany(mappedBy = "clubs",cascade = CascadeType.PERSIST,targetEntity = Students.class)
     @JsonManagedReference(value = "club")
     private List<Students> members;

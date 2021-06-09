@@ -6,9 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.util.List;
 
 @NoArgsConstructor
@@ -23,13 +26,12 @@ public class Department {
     @NotNull(message = "department name cannot be null")
     private String dept_name;
     private String hod;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false,updatable = false)
+    @CreationTimestamp
+    private Instant createdon;
     @Column(nullable = false)
-    private java.util.Date lastupdatedon;
-    @PrePersist
-    private void onCreate(){
-        lastupdatedon=new java.util.Date();
-    }
+    @UpdateTimestamp
+    private Instant lastupdatedon;
     @OneToMany(mappedBy = "department",cascade = CascadeType.PERSIST,targetEntity = Teachers.class)
     //@JoinColumn(name = "Teacher_id",referencedColumnName = "teacher_id")
     private List<Teachers> teacher_id;

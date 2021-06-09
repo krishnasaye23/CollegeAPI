@@ -3,10 +3,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.time.Instant;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,18 +24,16 @@ public class Teachers {
     private int teacher_id;
     @NotNull(message = "teacher name should not be null")
     // @Pattern(regexp="^[a-z][A-Z][0-9]",message="should not contain special characters")
-    //@Pattern(regexp = )
     private String teacher_name;
     private String sect;
     private Date dob;
     private String gender;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false,updatable = false)
+    @CreationTimestamp
+    private Instant createdon;
     @Column(nullable = false)
-    private java.util.Date lastupdatedon;
-    @PrePersist
-    private void onCreate(){
-        lastupdatedon=new java.util.Date();
-    }
+    @UpdateTimestamp
+    private Instant lastupdatedon;
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
     //@JsonBackReference
