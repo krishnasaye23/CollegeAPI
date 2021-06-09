@@ -23,17 +23,17 @@ public class AssociationCont {
         Dept_Association response=associationsImpl.getAssociationbyid(asc_id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @PostMapping("/association/add")
+    @PostMapping("/association")
     public ResponseEntity<Dept_Association> addAssociation(@Valid @RequestBody Dept_Association dept_association) {
         Dept_Association response=associationsImpl.addAssociation(dept_association);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
-    @PutMapping("/association/add")
+    @PutMapping("/association")
     public ResponseEntity<Dept_Association> updateAssociation(@Valid @RequestBody Dept_Association dept_association){
         Dept_Association response = associationsImpl.updateAssociation(dept_association);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @DeleteMapping("association/delete")
+    @DeleteMapping("association")
     public ResponseEntity<Dept_Association> delrecord(@RequestParam("asc_id") int asc_id){
         Dept_Association response = associationsImpl.delrecord(asc_id);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);

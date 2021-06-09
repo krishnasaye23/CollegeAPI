@@ -3,12 +3,10 @@ package com.example.schoolapi.Service;
 import com.example.schoolapi.Model.Department;
 import com.example.schoolapi.Repository.DepartmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@Component
 public class DepartmentsServImpl implements DepartmentsServ {
     @Autowired
     private DepartmentRepo departmentRepo;

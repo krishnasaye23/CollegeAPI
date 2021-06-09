@@ -24,17 +24,22 @@ public class ClubsCont {
         Clubs response=clubsImpl.getClubsbyid(club_id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @PostMapping("/clubs/add")
+    @GetMapping("/clubs/asc")
+    public ResponseEntity<List<Clubs>> getClubAsc(){
+        List<Clubs> mo=clubsImpl.getClubsOrderedAscending();
+        return new ResponseEntity<>(mo, HttpStatus.OK);
+    }
+    @PostMapping("/clubs")
     public ResponseEntity<Clubs> addClub(@Valid @RequestBody Clubs clubs) {
         Clubs response=clubsImpl.addClubs(clubs);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
-    @PutMapping("/clubs/add")
+    @PutMapping("/clubs")
     public ResponseEntity<Clubs> updateClub(@Valid @RequestBody Clubs clubs){
        Clubs response = clubsImpl.updateClubs(clubs);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @DeleteMapping("clubs/delete")
+    @DeleteMapping("clubs")
     public ResponseEntity<Clubs> delrecord(@RequestParam("club_id") int club_id){
         Clubs response = clubsImpl.delrecord(club_id);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);

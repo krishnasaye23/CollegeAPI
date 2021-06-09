@@ -3,12 +3,10 @@ package com.example.schoolapi.Service;
 import com.example.schoolapi.Model.Clubs;
 import com.example.schoolapi.Repository.ClubRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
 @Service
 public class ClubsServImpl implements ClubsServ{
     @Autowired
@@ -36,5 +34,10 @@ public class ClubsServImpl implements ClubsServ{
     public Clubs delrecord(int club_id) {
         Clubs g=clubRepo.deleteById(club_id);
         return g;
+    }
+
+    @Override
+    public List<Clubs> getClubsOrderedAscending() {
+        return clubRepo.getClubsOrderedAscending();
     }
 }

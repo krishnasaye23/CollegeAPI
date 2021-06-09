@@ -10,4 +10,5 @@ public interface StudentsServ {
     Students addStudents(Students students);
     Students updateStudents(Students students);
     Students delrecord(int student_id);
+    List<Students> getBoys(String gender);
 }

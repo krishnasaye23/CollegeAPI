@@ -9,4 +9,5 @@ public interface ClubsServ {
     Clubs addClubs(Clubs clubs);
     Clubs updateClubs(Clubs clubs);
     Clubs delrecord(int club_id);
+    List<Clubs> getClubsOrderedAscending();
 }

@@ -3,13 +3,11 @@ package com.example.schoolapi.Service;
 import com.example.schoolapi.Model.Dept_Association;
 import com.example.schoolapi.Repository.AssociationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Component
 public class AssociationsServImpl implements AssociationsServ{
     @Autowired
     private AssociationRepo associationRepo;

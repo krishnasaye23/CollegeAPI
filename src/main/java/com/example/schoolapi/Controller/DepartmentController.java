@@ -24,17 +24,17 @@ public class DepartmentCont {
         Department response=departmentsImpl.getDepartmentbyid(dept_id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @PostMapping("/department/add")
+    @PostMapping("/department")
     public ResponseEntity<Department> addDepartment(@Valid @RequestBody Department department) {
         Department response=departmentsImpl.addDepartments(department);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
-    @PutMapping("/department/add")
+    @PutMapping("/department")
     public ResponseEntity<Department> updateDepartment(@Valid @RequestBody Department department){
         Department response = departmentsImpl.updateDepartments(department);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @DeleteMapping("department/delete")
+    @DeleteMapping("department")
     public ResponseEntity<Department> delrecord(@RequestParam("dept_id") int dept_id){
         Department response = departmentsImpl.delrecord(dept_id);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);

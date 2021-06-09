@@ -24,17 +24,17 @@ public class TeachersCont {
         Teachers response=teachersImpl.getTeacherbyid(teacher_id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @PostMapping("/teachers/add")
+    @PostMapping("/teachers")
     public ResponseEntity<Teachers> addTeachers(@Valid @RequestBody Teachers teachers) {
         Teachers response=teachersImpl.addTeachers(teachers);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
-    @PutMapping("/teachers/add")
+    @PutMapping("/teachers")
     public ResponseEntity<Teachers> updateTeachers(@Valid @RequestBody Teachers teachers) {
         Teachers response=teachersImpl.updateTeachers(teachers);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
-    @DeleteMapping("teachers/delete")
+    @DeleteMapping("teachers")
     public ResponseEntity<Teachers> delrecord(@RequestParam("teacher_id") int teacher_id){
         Teachers response = teachersImpl.delrecord(teacher_id);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);

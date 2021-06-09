@@ -28,17 +28,22 @@ public class StudentsCont {
         Students response=studentsImpl.getStudentbyid(student_id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @PostMapping("/students/add")
+    @GetMapping("/students/boys")
+    public ResponseEntity<List<Students>> getBoys() {
+        List<Students> mo=studentsImpl.getBoys("male");
+        return new ResponseEntity<>(mo, HttpStatus.OK);
+    }
+    @PostMapping("/students")
     public ResponseEntity<Students> addStudents(@Valid @RequestBody Students students) {
         Students response=studentsImpl.addStudents(students);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
-    @PutMapping("/students/add")
+    @PutMapping("/students")
     public ResponseEntity<Students> updateStudents(@Valid @RequestBody Students students){
        Students response = studentsImpl.updateStudents(students);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @DeleteMapping("students/delete")
+    @DeleteMapping("students")
     public ResponseEntity<Students> delrecord(@RequestParam("student_id") int student_id){
         Students response = studentsImpl.delrecord(student_id);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
@@ -54,12 +59,12 @@ public class StudentsCont {
         StudentsDetails response= studentDetailsImpl.getStudentDetailsbyid(student_id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-    @PostMapping("/student_details/add")
+    @PostMapping("/student_details")
     public ResponseEntity<StudentsDetails> addStudentDetails(@Valid @RequestBody StudentsDetails studentsDetails) {
         StudentsDetails response=studentDetailsImpl.addStudentDetails(studentsDetails);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
-    @PutMapping("/student_details/add")
+    @PutMapping("/student_details")
     public ResponseEntity<StudentsDetails> updateStudents(@Valid @RequestBody StudentsDetails studentsDetails){
         StudentsDetails response = studentDetailsImpl.updateStudentDetails(studentsDetails);
         return new ResponseEntity<>(response,HttpStatus.OK);
