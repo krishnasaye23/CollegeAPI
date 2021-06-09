@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AssociationsServImpl implements AssociationsServ{
+public class AssociationsServiceImpl implements AssociationsService {
     @Autowired
     private AssociationRepo associationRepo;
     @Override

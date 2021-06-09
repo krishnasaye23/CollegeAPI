@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StudentDetailsServImpl implements StudentDetailsServ {
+public class StudentDetailsServiceImpl implements StudentDetailsService {
     @Autowired
     private StudentDetailsRepo studentDetailsRepo;
     @Override

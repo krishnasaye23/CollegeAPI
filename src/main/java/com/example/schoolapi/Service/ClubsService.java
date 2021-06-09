@@ -3,7 +3,7 @@ package com.example.schoolapi.Service;
 import com.example.schoolapi.Model.Clubs;
 import java.util.List;
 
-public interface ClubsServ {
+public interface ClubsService {
     List<Clubs> getClubs();
     Clubs getClubsbyid(int club_id);
     Clubs addClubs(Clubs clubs);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TeachersServImpl implements TeachersServ{
+public class TeachersServiceImpl implements TeachersService {
     @Autowired
     private TeacherRepo teacherRepo;
     @Override

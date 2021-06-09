@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class DepartmentsServImpl implements DepartmentsServ {
+public class DepartmentsServiceImpl implements DepartmentsService {
     @Autowired
     private DepartmentRepo departmentRepo;
     @Override

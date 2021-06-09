@@ -4,7 +4,7 @@ import com.example.schoolapi.Model.Department;
 
 import java.util.List;
 
-public interface DepartmentsServ {
+public interface DepartmentsService {
     List<Department> getDepartments();
     Department getDepartmentbyid(int dept_id);
     Department addDepartments(Department department);

@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
-public class StudentsServImpl implements StudentsServ {
+public class StudentsServiceImpl implements StudentsService {
     @Autowired
     private StudentRepo studentRepo;
     @Override
@@ -15,9 +17,11 @@ public class StudentsServImpl implements StudentsServ {
         return studentRepo.findAll();
     }
     @Override
-    public Students getStudentbyid(int student_id) {
-        Students opt=studentRepo.findById(student_id);
-        return opt;
+    public Students getStudentbyid(int student_id) throws Exception{
+        Optional<Students> opt= Optional.ofNullable(studentRepo.findById(student_id));
+        if(!opt.isPresent())
+            throw new Exception("Student not found with the given id "+student_id);
+        return opt.get();
     }
     @Override
     public Students addStudents(Students students){
@@ -30,13 +34,18 @@ public class StudentsServImpl implements StudentsServ {
         return students;
     }
     @Override
-    public Students delrecord(int student_id) {
-        Students g=studentRepo.deleteById(student_id);
-        return g;
+    public Students delrecord(int student_id) throws Exception{
+        Optional<Students> g= Optional.ofNullable(studentRepo.deleteById(student_id));
+        if(!g.isPresent())
+            throw new Exception("Student not found with the given id "+student_id);
+        return g.get();
     }
 
     @Override
-    public List<Students> getBoys(String gender) {
-        return studentRepo.getBoys(gender);
+    public List<Students> getBoys(String gender) throws Exception {
+        Optional<List<Students>> opt= Optional.ofNullable(studentRepo.getBoys(gender));
+        if(!opt.isPresent())
+            throw new Exception("There are no boys in the record now");
+        return opt.get();
     }
 }

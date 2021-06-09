@@ -4,7 +4,7 @@ import com.example.schoolapi.Model.Dept_Association;
 
 import java.util.List;
 
-public interface AssociationsServ {
+public interface AssociationsService {
     List<Dept_Association> getAssociation();
     Dept_Association getAssociationbyid(int asc_id);
     Dept_Association addAssociation(Dept_Association dept_association);
