@@ -10,4 +10,5 @@ public interface ClubRepo extends JpaRepository<Clubs,Integer> {
     List<Clubs> findAll();
     Clubs deleteById(int club_id);
     Clubs findById(int club_id);
+    List<Clubs> getClubsOrderedAscending();
 }

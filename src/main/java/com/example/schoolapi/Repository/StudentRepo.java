@@ -11,4 +11,5 @@ public interface StudentRepo extends JpaRepository<Students,Integer> {
     List<Students> findAll();
     Students deleteById(int student_id);
     Students findById(int student_id);
+    List<Students> getBoys(String gender);
 }
