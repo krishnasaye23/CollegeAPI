@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 
 @Data
 @MappedSuperclass
-public class StudentsDetails {
+public class Dept_Associations {
     @Id
-    protected int id;
+    protected int asc_id;
 }
