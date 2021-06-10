@@ -1,6 +1,6 @@
 package com.example.schoolapi.Service;
 
-import com.example.schoolapi.Model.Department;
+import com.example.schoolapi.Entity.DepartmentEntity;
 import com.example.schoolapi.Repository.DepartmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,27 +11,27 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     @Autowired
     private DepartmentRepo departmentRepo;
     @Override
-    public List<Department> getDepartments() {
+    public List<DepartmentEntity> getDepartments() {
         return departmentRepo.findAll();
     }
     @Override
-    public Department getDepartmentbyid(int dept_id) {
-        Department opt=departmentRepo.findById(dept_id);
+    public DepartmentEntity getDepartmentbyid(int dept_id) {
+        DepartmentEntity opt=departmentRepo.findById(dept_id);
         return opt;
     }
     @Override
-    public Department addDepartments(Department department){
+    public DepartmentEntity addDepartments(DepartmentEntity department){
         departmentRepo.save(department);
         return department;
     }
     @Override
-    public Department updateDepartments(Department department){
+    public DepartmentEntity updateDepartments(DepartmentEntity department){
         departmentRepo.save(department);
         return department;
     }
     @Override
-    public Department delrecord(int dept_id) {
-        Department g=departmentRepo.deleteById(dept_id);
+    public DepartmentEntity delrecord(int dept_id) {
+        DepartmentEntity g=departmentRepo.deleteById(dept_id);
         return g;
     }
 }

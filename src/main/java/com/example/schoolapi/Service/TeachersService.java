@@ -1,13 +1,13 @@
 package com.example.schoolapi.Service;
 
-import com.example.schoolapi.Model.Teachers;
+import com.example.schoolapi.Entity.TeacherEntity;
 
 import java.util.List;
 
 public interface TeachersService {
-    List<Teachers> getTeachers();
-    Teachers getTeacherbyid(int teacher_id);
-    Teachers addTeachers(Teachers teachers);
-    Teachers updateTeachers(Teachers teachers);
-    Teachers delrecord(int teacher_id);
+    List<TeacherEntity> getTeachers();
+    TeacherEntity getTeacherbyid(int teacher_id);
+    TeacherEntity addTeachers(TeacherEntity teachers);
+    TeacherEntity updateTeachers(TeacherEntity teachers);
+    TeacherEntity delrecord(int teacher_id);
 }

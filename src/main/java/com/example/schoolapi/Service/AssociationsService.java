@@ -1,13 +1,13 @@
 package com.example.schoolapi.Service;
 
-import com.example.schoolapi.Model.Dept_Association;
+import com.example.schoolapi.Entity.Dept_AssociationEntity;
 
 import java.util.List;
 
 public interface AssociationsService {
-    List<Dept_Association> getAssociation();
-    Dept_Association getAssociationbyid(int asc_id);
-    Dept_Association addAssociation(Dept_Association dept_association);
-    Dept_Association updateAssociation(Dept_Association dept_association);
-    Dept_Association delrecord(int asc_id);
+    List<Dept_AssociationEntity> getAssociation();
+    Dept_AssociationEntity getAssociationbyid(int asc_id);
+    Dept_AssociationEntity addAssociation(Dept_AssociationEntity dept_association);
+    Dept_AssociationEntity updateAssociation(Dept_AssociationEntity dept_association);
+    Dept_AssociationEntity delrecord(int asc_id);
 }

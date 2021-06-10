@@ -1,6 +1,6 @@
 package com.example.schoolapi.Service;
 
-import com.example.schoolapi.Model.Teachers;
+import com.example.schoolapi.Entity.TeacherEntity;
 import com.example.schoolapi.Repository.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,27 +11,27 @@ public class TeachersServiceImpl implements TeachersService {
     @Autowired
     private TeacherRepo teacherRepo;
     @Override
-    public List<Teachers> getTeachers() {
+    public List<TeacherEntity> getTeachers() {
         return teacherRepo.findAll();
     }
     @Override
-    public Teachers addTeachers(Teachers teachers){
+    public TeacherEntity addTeachers(TeacherEntity teachers){
         teacherRepo.save(teachers);
         return teachers;
     }
     @Override
-    public Teachers updateTeachers(Teachers teachers){
+    public TeacherEntity updateTeachers(TeacherEntity teachers){
         teacherRepo.save(teachers);
         return teachers;
     }
     @Override
-    public Teachers delrecord(int teacher_id) {
-        Teachers g=teacherRepo.deleteById(teacher_id);
+    public TeacherEntity delrecord(int teacher_id) {
+        TeacherEntity g=teacherRepo.deleteById(teacher_id);
         return g;
     }
     @Override
-    public Teachers getTeacherbyid(int teacher_id) {
-        Teachers opt=teacherRepo.findById(teacher_id);
+    public TeacherEntity getTeacherbyid(int teacher_id) {
+        TeacherEntity opt=teacherRepo.findById(teacher_id);
         return opt;
     }
 

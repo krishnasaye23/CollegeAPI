@@ -1,6 +1,6 @@
 package com.example.schoolapi.Service;
 
-import com.example.schoolapi.Model.StudentsDetails;
+import com.example.schoolapi.Entity.StudentsDetailEntity;
 import com.example.schoolapi.Repository.StudentDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +12,21 @@ public class StudentDetailsServiceImpl implements StudentDetailsService {
     @Autowired
     private StudentDetailsRepo studentDetailsRepo;
     @Override
-    public List<StudentsDetails> getStudentDetails() {
+    public List<StudentsDetailEntity> getStudentDetails() {
         return studentDetailsRepo.findAll();
     }
     @Override
-    public StudentsDetails getStudentDetailsbyid(int student_id) {
-        StudentsDetails opt=studentDetailsRepo.findById(student_id);
+    public StudentsDetailEntity getStudentDetailsbyid(int student_id) {
+        StudentsDetailEntity opt=studentDetailsRepo.findById(student_id);
         return opt;
     }
     @Override
-    public StudentsDetails addStudentDetails(StudentsDetails studentsDetails){
+    public StudentsDetailEntity addStudentDetails(StudentsDetailEntity studentsDetails){
         studentDetailsRepo.save(studentsDetails);
         return studentsDetails;
     }
     @Override
-    public StudentsDetails updateStudentDetails(StudentsDetails studentsDetails){
+    public StudentsDetailEntity updateStudentDetails(StudentsDetailEntity studentsDetails){
         studentDetailsRepo.save(studentsDetails);
         return studentsDetails;
     }

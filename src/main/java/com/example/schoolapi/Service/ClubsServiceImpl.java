@@ -1,6 +1,6 @@
 package com.example.schoolapi.Service;
 
-import com.example.schoolapi.Model.Clubs;
+import com.example.schoolapi.Entity.ClubEntity;
 import com.example.schoolapi.Repository.ClubRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,32 +12,32 @@ public class ClubsServiceImpl implements ClubsService {
     @Autowired
     private ClubRepo clubRepo;
     @Override
-    public List<Clubs> getClubs() {
+    public List<ClubEntity> getClubs() {
         return clubRepo.findAll();
     }
     @Override
-    public Clubs getClubsbyid(int club_id) {
-        Clubs opt=clubRepo.findById(club_id);
+    public ClubEntity getClubsbyid(int club_id) {
+        ClubEntity opt=clubRepo.findById(club_id);
         return opt;
     }
     @Override
-    public Clubs addClubs(Clubs clubs){
+    public ClubEntity addClubs(ClubEntity clubs){
         clubRepo.save(clubs);
         return clubs;
     }
     @Override
-    public Clubs updateClubs(Clubs clubs){
+    public ClubEntity updateClubs(ClubEntity clubs){
         clubRepo.save(clubs);
         return clubs;
     }
     @Override
-    public Clubs delrecord(int club_id) {
-        Clubs g=clubRepo.deleteById(club_id);
+    public ClubEntity delrecord(int club_id) {
+        ClubEntity g=clubRepo.deleteById(club_id);
         return g;
     }
 
     @Override
-    public List<Clubs> getClubsOrderedAscending() {
+    public List<ClubEntity> getClubsOrderedAscending() {
         return clubRepo.getClubsOrderedAscending();
     }
 }
