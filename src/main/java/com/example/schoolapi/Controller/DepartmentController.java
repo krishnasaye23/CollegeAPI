@@ -1,6 +1,6 @@
 package com.example.schoolapi.Controller;
 
-import com.example.schoolapi.Model.Department;
+import com.example.schoolapi.Entity.DepartmentEntity;
 import com.example.schoolapi.Service.DepartmentsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class DepartmentController {
     @GetMapping("/department")
     public ResponseEntity<Object> getDepartment(){
         try {
-            List<Department> mo = departmentsImpl.getDepartments();
+            List<DepartmentEntity> mo = departmentsImpl.getDepartments();
             return new ResponseEntity<>(mo, HttpStatus.OK);
         }
         catch (Exception e){
@@ -28,7 +28,7 @@ public class DepartmentController {
     @GetMapping("/department/{dept_id}")
     public ResponseEntity<Object> getbyid(@PathVariable int dept_id){
         try {
-            Department response = departmentsImpl.getDepartmentbyid(dept_id);
+            DepartmentEntity response = departmentsImpl.getDepartmentbyid(dept_id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
         catch (Exception e){
@@ -37,19 +37,19 @@ public class DepartmentController {
         }
     }
     @PostMapping("/department")
-    public ResponseEntity<Department> addDepartment(@Valid @RequestBody Department department) {
-        Department response=departmentsImpl.addDepartments(department);
+    public ResponseEntity<DepartmentEntity> addDepartment(@Valid @RequestBody DepartmentEntity department) {
+        DepartmentEntity response=departmentsImpl.addDepartments(department);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
     @PutMapping("/department")
-    public ResponseEntity<Department> updateDepartment(@Valid @RequestBody Department department){
-        Department response = departmentsImpl.updateDepartments(department);
+    public ResponseEntity<DepartmentEntity> updateDepartment(@Valid @RequestBody DepartmentEntity department){
+        DepartmentEntity response = departmentsImpl.updateDepartments(department);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @DeleteMapping("department")
     public ResponseEntity<Object> delrecord(@RequestParam("dept_id") int dept_id){
         try {
-            Department response = departmentsImpl.delrecord(dept_id);
+            DepartmentEntity response = departmentsImpl.delrecord(dept_id);
             return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
         }
         catch (Exception e){

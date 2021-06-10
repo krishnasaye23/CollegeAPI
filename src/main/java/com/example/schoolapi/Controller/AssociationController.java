@@ -1,6 +1,6 @@
 package com.example.schoolapi.Controller;
 
-import com.example.schoolapi.Model.Dept_Association;
+import com.example.schoolapi.Entity.Dept_AssociationEntity;
 import com.example.schoolapi.Service.AssociationsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,28 +14,28 @@ public class AssociationController {
     @Autowired
     private AssociationsServiceImpl associationsImpl;
     @GetMapping("/association")
-    public ResponseEntity<List<Dept_Association>> getAssociation(){
-        List<Dept_Association> mo=associationsImpl.getAssociation();
+    public ResponseEntity<List<Dept_AssociationEntity>> getAssociation(){
+        List<Dept_AssociationEntity> mo=associationsImpl.getAssociation();
         return new ResponseEntity<>(mo, HttpStatus.OK);
     }
     @GetMapping("/association/{asc_id}")
-    public ResponseEntity<Dept_Association> getbyid(@PathVariable int asc_id){
-        Dept_Association response=associationsImpl.getAssociationbyid(asc_id);
+    public ResponseEntity<Dept_AssociationEntity> getbyid(@PathVariable int asc_id){
+        Dept_AssociationEntity response=associationsImpl.getAssociationbyid(asc_id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @PostMapping("/association")
-    public ResponseEntity<Dept_Association> addAssociation(@Valid @RequestBody Dept_Association dept_association) {
-        Dept_Association response=associationsImpl.addAssociation(dept_association);
+    public ResponseEntity<Dept_AssociationEntity> addAssociation(@Valid @RequestBody Dept_AssociationEntity dept_association) {
+        Dept_AssociationEntity response=associationsImpl.addAssociation(dept_association);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
     @PutMapping("/association")
-    public ResponseEntity<Dept_Association> updateAssociation(@Valid @RequestBody Dept_Association dept_association){
-        Dept_Association response = associationsImpl.updateAssociation(dept_association);
+    public ResponseEntity<Dept_AssociationEntity> updateAssociation(@Valid @RequestBody Dept_AssociationEntity dept_association){
+        Dept_AssociationEntity response = associationsImpl.updateAssociation(dept_association);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @DeleteMapping("association")
-    public ResponseEntity<Dept_Association> delrecord(@RequestParam("asc_id") int asc_id){
-        Dept_Association response = associationsImpl.delrecord(asc_id);
+    public ResponseEntity<Dept_AssociationEntity> delrecord(@RequestParam("asc_id") int asc_id){
+        Dept_AssociationEntity response = associationsImpl.delrecord(asc_id);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 }
