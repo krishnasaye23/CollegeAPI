@@ -9,8 +9,10 @@ import java.util.List;
 
 @Service
 public class AssociationsServiceImpl implements AssociationsService {
+
     @Autowired
     private AssociationRepo associationRepo;
+
     @Override
     public List<Dept_AssociationEntity> getAssociation() {
         return associationRepo.findAll();
