@@ -9,5 +9,5 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class Dept_Associations {
     @Id
-    protected int asc_id;
+    private int asc_id;
 }
