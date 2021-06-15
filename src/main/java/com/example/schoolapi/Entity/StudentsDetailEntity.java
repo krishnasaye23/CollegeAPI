@@ -1,6 +1,7 @@
 package com.example.schoolapi.Entity;
 
 import com.example.schoolapi.Model.StudentsDetails;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.time.Instant;
 
 @Entity
@@ -19,8 +22,10 @@ public class StudentsDetailEntity extends StudentsDetails {
 
     private String father_name;
     private String mother_name;
+    @Email(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", message = "Email-id is invalid....check again")
     private String email;
     private double cgpa;
+    @Pattern(regexp = "^[0-9]+$")
     private String contact_no;
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
@@ -30,8 +35,7 @@ public class StudentsDetailEntity extends StudentsDetails {
     private Instant lastupdatedon;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="Student_id",referencedColumnName = "student_id")
-    @MapsId
-    //@JsonBackReference(value="studentsdetails")
+    @JsonBackReference(value="studentsdetails")
     private StudentEntity students;
 
 }

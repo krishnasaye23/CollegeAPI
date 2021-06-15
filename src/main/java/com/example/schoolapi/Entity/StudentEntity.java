@@ -3,15 +3,14 @@ package com.example.schoolapi.Entity;
 import com.example.schoolapi.Model.Students;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.Instant;
 import java.util.Date;
 
@@ -27,6 +26,7 @@ public class StudentEntity extends Students {
 
     @NotNull(message = "student name should not be null")
     // @Pattern(regexp="^[a-z][A-Z][0-9]",message="should not contain special characters")
+    @Pattern(regexp = "^[a-zA-Z]*$")
     private String student_name;
     private int batch;  //year
     private String sect;
@@ -54,10 +54,8 @@ public class StudentEntity extends Students {
     @JoinColumn(name = "Asc_id",referencedColumnName = "asc_id")
     @JsonBackReference(value="dept_association")
     private Dept_AssociationEntity dept_association;
-   /* @OneToOne(mappedBy = "students",cascade = CascadeType.PERSIST)
-    //@JsonManagedReference(value = "studentsdetails")
-    private StudentsDetailEntity students_details;*/
-
-
+   @OneToOne(mappedBy = "students",cascade = CascadeType.PERSIST)
+    @JsonManagedReference(value = "studentsdetails")
+    private StudentsDetailEntity students_details;
 
 }

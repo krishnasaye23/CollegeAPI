@@ -2,15 +2,13 @@ package com.example.schoolapi.Entity;
 
 import com.example.schoolapi.Model.Departments;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.Instant;
 import java.util.List;
 
@@ -23,6 +21,7 @@ import java.util.List;
 public class DepartmentEntity extends Departments {
 
     @NotNull(message = "department name cannot be null")
+    @Pattern(regexp = "^[a-zA-Z]*$")
     private String dept_name;
     private String hod;
     @Column(nullable = false,updatable = false)
