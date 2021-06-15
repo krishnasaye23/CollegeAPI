@@ -1,0 +1,22 @@
+version: '2'
+services:
+  ctomcat:
+    build:
+      context: ""
+      dockerfile: ./docker/tomcat/Dockerfile
+    ports:
+      - "8080:8080"
+      - "18000:18000"
+    image: itomcat-kctcollege-management:1.0
+    env_file:
+      - ./config.env
+  cpostgres:
+#    volumes:
+#      - ./sql/data.sql:/docker-entrypoint-initdb.d/data.sql
+    build:
+      context: "./docker/postgres"
+    restart: always
+    image: ipostgres-kctcollege-management
+    ports:
+      - 5434:5432
+

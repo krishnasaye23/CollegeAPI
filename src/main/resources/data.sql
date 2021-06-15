@@ -1,4 +1,5 @@
-CREATE TABLE if not exists department
+use collegeDB;
+CREATE TABLE if not exists public.department
 (
     dept_id integer NOT NULL PRIMARY KEY,
     dept_name varchar(25) NOT NULL,
@@ -6,8 +7,8 @@ CREATE TABLE if not exists department
     FOREIGN KEY (Student_id) REFERENCES students(student_id),
     FOREIGN KEY (Teacher_id) REFERENCES Teachers(teacher_id),
     FOREIGN KEY (Asc_id) REFERENCES Dept_Association(asc_id)
-);
-CREATE TABLE if not exists clubs
+    );
+CREATE TABLE if not exists public.clubs
 (
     club_id integer NOT NULL PRIMARY KEY,
     club_name varchar(25) NOT NULL,
@@ -16,7 +17,7 @@ CREATE TABLE if not exists clubs
     about varchar(100),
     FOREIGN KEY (Student_id) REFERENCES students(student_id)
     );
-CREATE TABLE if not exists dept_association
+CREATE TABLE if not exists public.dept_association
 (
     asc_id integer NOT NULL PRIMARY KEY,
     asc_name varchar(50) NOT NULL,
@@ -26,7 +27,7 @@ CREATE TABLE if not exists dept_association
     FOREIGN KEY (Dept_id) REFERENCES Department(dept_id),
     FOREIGN KEY (Student_id) REFERENCES students(student_id)
     );
-CREATE TABLE if not exists students
+CREATE TABLE if not exists public.students
 (
     student_id integer NOT NULL,
     student_name varchar(25),
@@ -41,8 +42,8 @@ CREATE TABLE if not exists students
     FOREIGN KEY (Dept_id) REFERENCES department(dept_id),
     FOREIGN KEY (Club_id) REFERENCES department(club_id),
     FOREIGN KEY (Asc_id) REFERENCES department(asc_id)
-);
-CREATE TABLE IF NOT EXISTS students_details
+    );
+CREATE TABLE IF NOT EXISTS public.students_details
 (
     id integer,
     father_name varchar(20),
@@ -50,10 +51,10 @@ CREATE TABLE IF NOT EXISTS students_details
     email varchar(25),
     cgpa double,
     contactno varchar(20),
-    student_id integer NOT NULL PRIMARY KEY,
-    FOREIGN KEY (student_id) REFERENCES students(student_id)
-);
-CREATE TABLE if not exists Teachers
+    Student_id integer NOT NULL PRIMARY KEY,
+    FOREIGN KEY (Student_id) REFERENCES students(student_id)
+    );
+CREATE TABLE if not exists public.teachers
 (
     teacher_id integer NOT NULL,
     teacher_name varchar(25),
@@ -63,4 +64,4 @@ CREATE TABLE if not exists Teachers
     Dept_id integer not null,
     CONSTRAINT Teachers PRIMARY KEY (teacher_id),
     FOREIGN KEY (Dept_id) REFERENCES department(dept_id)
-);
+    );
