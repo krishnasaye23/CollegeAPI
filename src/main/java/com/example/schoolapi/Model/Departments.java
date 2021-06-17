@@ -9,5 +9,5 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class Departments {
     @Id
-    protected String dept_id;
+    protected int dept_id;
 }

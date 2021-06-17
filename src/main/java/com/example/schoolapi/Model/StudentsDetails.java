@@ -10,4 +10,5 @@ import javax.persistence.MappedSuperclass;
 public class StudentsDetails {
     @Id
     protected int id;
+
 }
