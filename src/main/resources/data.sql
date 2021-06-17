@@ -1,12 +1,11 @@
-use collegeDB;
 CREATE TABLE if not exists public.department
 (
     dept_id integer NOT NULL PRIMARY KEY,
     dept_name varchar(25) NOT NULL,
     hod varchar(25),
     FOREIGN KEY (Student_id) REFERENCES students(student_id),
-    FOREIGN KEY (Teacher_id) REFERENCES Teachers(teacher_id),
-    FOREIGN KEY (Asc_id) REFERENCES Dept_Association(asc_id)
+    FOREIGN KEY (Teacher_id) REFERENCES teachers(teacher_id),
+    FOREIGN KEY (Asc_id) REFERENCES dept_Association(asc_id)
     );
 CREATE TABLE if not exists public.clubs
 (
@@ -24,7 +23,7 @@ CREATE TABLE if not exists public.dept_association
     president varchar(25),
     vice_president varchar(25),
     Dept_id integer not null,
-    FOREIGN KEY (Dept_id) REFERENCES Department(dept_id),
+    FOREIGN KEY (Dept_id) REFERENCES department(dept_id),
     FOREIGN KEY (Student_id) REFERENCES students(student_id)
     );
 CREATE TABLE if not exists public.students
@@ -38,7 +37,7 @@ CREATE TABLE if not exists public.students
     Dept_id integer not null,
     Club_id integer,
     Asc_id integer,
-    CONSTRAINT Students PRIMARY KEY (student_id),
+    CONSTRAINT students PRIMARY KEY (student_id),
     FOREIGN KEY (Dept_id) REFERENCES department(dept_id),
     FOREIGN KEY (Club_id) REFERENCES department(club_id),
     FOREIGN KEY (Asc_id) REFERENCES department(asc_id)
