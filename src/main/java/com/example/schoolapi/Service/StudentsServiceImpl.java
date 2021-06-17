@@ -42,10 +42,10 @@ public class StudentsServiceImpl implements StudentsService {
     }
 
     @Override
-    public List<StudentEntity> getBoys(String gender) throws Exception {
-        Optional<List<StudentEntity>> opt= Optional.ofNullable(studentRepo.getBoys(gender));
+    public List<StudentEntity> getBoysOrGirls(String gender) throws Exception {
+        Optional<List<StudentEntity>> opt= Optional.ofNullable(studentRepo.getBoysOrGirls(gender));
         if(!opt.isPresent())
-            throw new Exception("There are no boys in the record now");
+            throw new Exception("There are no "+gender+" in the records now");
         return opt.get();
     }
     @Override

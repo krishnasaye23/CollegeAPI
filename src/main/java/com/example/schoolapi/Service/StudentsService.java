@@ -10,6 +10,6 @@ public interface StudentsService {
     StudentEntity addStudents(StudentEntity students);
     StudentEntity updateStudents(StudentEntity students);
     StudentEntity delrecord(int student_id) throws Exception;
-    List<StudentEntity> getBoys(String gender) throws Exception;
+    List<StudentEntity> getBoysOrGirls(String gender) throws Exception;
     List<StudentEntity> getStudentsByBatch(int batch) throws Exception;
 }
