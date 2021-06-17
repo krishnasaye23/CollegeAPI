@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.Instant;
 import java.util.List;
 
@@ -22,7 +23,9 @@ public class ClubEntity extends Clubs {
 
     @NotNull(message = "club name cannot be null")
     private String club_name;
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String president;
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String vice_president;
     private String about;
     @Column(nullable = false,updatable=false)
@@ -31,7 +34,7 @@ public class ClubEntity extends Clubs {
     @Column(nullable = false)
     @UpdateTimestamp
     private Instant lastupdatedon;
-    @OneToMany(mappedBy = "clubs",cascade = CascadeType.PERSIST,targetEntity = StudentEntity.class)
+    @OneToMany(mappedBy = "clubs",cascade = CascadeType.PERSIST,orphanRemoval = true)
     @JsonManagedReference(value = "club")
     private List<StudentEntity> members;
 }

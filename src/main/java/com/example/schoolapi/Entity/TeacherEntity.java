@@ -1,5 +1,6 @@
 package com.example.schoolapi.Entity;
 import com.example.schoolapi.Model.Teachers;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,7 +21,7 @@ import java.time.Instant;
 public class TeacherEntity extends Teachers {
 
     @NotNull(message = "teacher name should not be null")
-    @Pattern(regexp = "^[a-zA-Z]*$")
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String teacher_name;
     private String sect;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd:MM:yyyy")
@@ -33,9 +34,9 @@ public class TeacherEntity extends Teachers {
     @Column(nullable = false)
     @UpdateTimestamp
     private Instant lastupdatedon;
-    @ManyToOne( cascade = CascadeType.ALL)
+    @ManyToOne( cascade = CascadeType.PERSIST)
     @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
-    //@JsonBackReference
+    @JsonBackReference(value = "teachers")
     private DepartmentEntity department;
 
     public TeacherEntity(int teacher_id,String teacher_name) {

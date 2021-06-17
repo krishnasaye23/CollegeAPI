@@ -20,13 +20,17 @@ import java.time.Instant;
 @NoArgsConstructor
 public class StudentsDetailEntity extends StudentsDetails {
 
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String father_name;
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String mother_name;
     @Email(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", message = "Email-id is invalid....check again")
     private String email;
     private double cgpa;
     @Pattern(regexp = "^[0-9]+$")
     private String contact_no;
+    @Transient
+    public String remarks;
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
     private Instant createdon;

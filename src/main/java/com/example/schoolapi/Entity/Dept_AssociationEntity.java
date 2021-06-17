@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.Instant;
 import java.util.List;
 
@@ -21,8 +22,11 @@ import java.util.List;
 public class Dept_AssociationEntity extends Dept_Associations {
 
     @NotNull(message = "association name cannot be null")
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String asc_name;
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String president;
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String vice_president;
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
@@ -34,7 +38,7 @@ public class Dept_AssociationEntity extends Dept_Associations {
     @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
     @JsonBackReference(value="association")
     private DepartmentEntity department;
-    @OneToMany(mappedBy = "dept_association",cascade = CascadeType.PERSIST,targetEntity = StudentEntity.class)
+    @OneToMany(mappedBy = "dept_association",cascade = CascadeType.PERSIST,orphanRemoval = true)
     @JsonManagedReference(value = "dept_association")
     private List<StudentEntity> asc_members;
 }

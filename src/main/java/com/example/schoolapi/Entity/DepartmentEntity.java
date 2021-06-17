@@ -1,6 +1,7 @@
 package com.example.schoolapi.Entity;
 
 import com.example.schoolapi.Model.Departments;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,8 +22,9 @@ import java.util.List;
 public class DepartmentEntity extends Departments {
 
     @NotNull(message = "department name cannot be null")
-    @Pattern(regexp = "^[a-zA-Z]*$")
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String dept_name;
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String hod;
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
@@ -30,14 +32,13 @@ public class DepartmentEntity extends Departments {
     @Column(nullable = false)
     @UpdateTimestamp
     private Instant lastupdatedon;
-    @OneToMany(mappedBy = "department",cascade = CascadeType.PERSIST,targetEntity = TeacherEntity.class)
-    //@JoinColumn(name = "Teacher_id",referencedColumnName = "teacher_id")
+    @OneToMany(mappedBy = "department",cascade = CascadeType.PERSIST,orphanRemoval = true)
+    @JsonManagedReference(value = "teachers")
     private List<TeacherEntity> teacher_id;
-    @OneToMany(mappedBy = "department",cascade = CascadeType.PERSIST,targetEntity = StudentEntity.class)
-    //@JoinColumn(name = "Student_id",referencedColumnName = "student_id")
+    @OneToMany(mappedBy = "department",cascade = CascadeType.PERSIST,orphanRemoval = true)
     @JsonManagedReference(value = "department")
     private List<StudentEntity> student_id;
-    @OneToOne(mappedBy = "department",cascade = CascadeType.PERSIST,targetEntity = Dept_AssociationEntity.class)
+    @OneToOne(mappedBy = "department",cascade = CascadeType.PERSIST,orphanRemoval = true)
     @JsonManagedReference(value = "association")
     private Dept_AssociationEntity asc_id;
 }

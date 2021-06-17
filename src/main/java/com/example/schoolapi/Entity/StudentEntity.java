@@ -20,13 +20,13 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "students")
-@NamedNativeQueries(value = {@NamedNativeQuery(name = "StudentEntity.getBoys",query = "select * from students where gender=? order by student_name",resultClass = StudentEntity.class),
+@NamedNativeQueries(value = {@NamedNativeQuery(name = "StudentEntity.getBoysOrGirls",query = "select * from students where gender=? order by student_name",resultClass = StudentEntity.class),
                              @NamedNativeQuery(name = "StudentEntity.getStudentsByBatch",query = "select * from students where batch=?",resultClass = StudentEntity.class)})
 public class StudentEntity extends Students {
 
     @NotNull(message = "student name should not be null")
     // @Pattern(regexp="^[a-z][A-Z][0-9]",message="should not contain special characters")
-    @Pattern(regexp = "^[a-zA-Z]*$")
+    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String student_name;
     private int batch;  //year
     private String sect;
@@ -41,7 +41,6 @@ public class StudentEntity extends Students {
     @UpdateTimestamp
     private Instant lastupdatedon;
 
-
    @ManyToOne(cascade = CascadeType.PERSIST)
    @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
    @JsonBackReference(value = "department")
@@ -54,7 +53,7 @@ public class StudentEntity extends Students {
     @JoinColumn(name = "Asc_id",referencedColumnName = "asc_id")
     @JsonBackReference(value="dept_association")
     private Dept_AssociationEntity dept_association;
-   @OneToOne(mappedBy = "students",cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "students",cascade = CascadeType.PERSIST,orphanRemoval = true)
     @JsonManagedReference(value = "studentsdetails")
     private StudentsDetailEntity students_details;
 
