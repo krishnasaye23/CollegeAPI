@@ -42,14 +42,14 @@ public class StudentsController {
 
     }
     @GetMapping("/students/boys")
-    public ResponseEntity<Object> getBoys() {
+    public ResponseEntity<Object> getByGender(@Valid @RequestParam String gender) {
         List<StudentEntity> mo;
         try {
-            mo = studentsImpl.getBoys("male");
+            mo = studentsImpl.getBoysOrGirls(gender);
             return new ResponseEntity<>(mo, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>("There are no boys in the record now",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("There are no students with the specified gender in the record now",HttpStatus.BAD_REQUEST);
         }
     }
     @GetMapping("/students/batch")
@@ -87,6 +87,8 @@ public class StudentsController {
         }
 
     }
+
+    //API calls for StudentDetails service
 
     @GetMapping("/student_details")
     public ResponseEntity<Object> getStudentDetails(){
