@@ -8,11 +8,9 @@ services:
       - "8080:8080"
       - "18000:18000"
     image: itomcat-kctcollege-management:1.0
-    env_file:
-      - ./config.env
+    depends_on:
+      - cpostgres
   cpostgres:
-#    volumes:
-#      - ./sql/data.sql:/docker-entrypoint-initdb.d/data.sql
     build:
       context: "./docker/postgres"
     restart: always
