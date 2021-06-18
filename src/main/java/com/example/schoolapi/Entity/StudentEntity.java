@@ -25,8 +25,7 @@ import java.util.Date;
 public class StudentEntity extends Students {
 
     @NotNull(message = "student name should not be null")
-    // @Pattern(regexp="^[a-z][A-Z][0-9]",message="should not contain special characters")
-    @Pattern(regexp = "^[a-zA-Z ]*$")
+    @Pattern(regexp = "^[a-zA-Z ]*$",message = "Name should not contain special characters")
     private String student_name;
     private int batch;  //year
     private String sect;
