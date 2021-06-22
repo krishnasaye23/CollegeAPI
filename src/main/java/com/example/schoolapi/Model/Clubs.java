@@ -1,13 +1,29 @@
 package com.example.schoolapi.Model;
 
-import lombok.Data;
+import com.example.schoolapi.Entity.StudentEntity;
+import lombok.*;
 
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.time.Instant;
+import java.util.List;
 
-@Data
-@MappedSuperclass
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Clubs {
     @Id
-    protected int club_id;
+    private int club_id;
+    @NotNull(message = "club name cannot be null")
+    private String club_name;
+    @Pattern(regexp = "^[a-zA-Z ]*$")
+    private String president;
+    @Pattern(regexp = "^[a-zA-Z ]*$")
+    private String vice_president;
+    private String about;
+    private Instant createdon;
+    private Instant lastupdatedon;
+    private List<StudentEntity> members;
 }
