@@ -1,15 +1,15 @@
 package com.example.schoolapi.Service;
 
-import com.example.schoolapi.Entity.StudentEntity;
+import com.example.schoolapi.Model.Students;
 
 import java.util.List;
 
 public interface StudentsService {
-    List<StudentEntity> getStudents() throws Exception;
-    StudentEntity getStudentbyid(int student_id) throws Exception;
-    StudentEntity addStudents(StudentEntity students);
-    StudentEntity updateStudents(StudentEntity students);
-    StudentEntity delrecord(int student_id) throws Exception;
-    List<StudentEntity> getBoysOrGirls(String gender) throws Exception;
-    List<StudentEntity> getStudentsByBatch(int batch) throws Exception;
+    List<Students> getStudents();
+    Students getStudentbyid(int student_id);
+    Students addStudents(Students students);
+    Students updateStudents(Students students);
+    Students delrecord(int student_id);
+    List<Students> getBoysOrGirls(String gender);
+    List<Students> getStudentsByBatch(int batch);
 }

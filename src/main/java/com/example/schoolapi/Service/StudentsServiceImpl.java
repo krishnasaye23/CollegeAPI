@@ -1,58 +1,65 @@
 package com.example.schoolapi.Service;
 
 import com.example.schoolapi.Entity.StudentEntity;
+import com.example.schoolapi.Model.Students;
 import com.example.schoolapi.Repository.StudentRepo;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentsServiceImpl implements StudentsService {
     @Autowired
     private StudentRepo studentRepo;
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
-    public List<StudentEntity> getStudents() {
-        return studentRepo.findAll();
+    public List<Students> getStudents() {
+
+        return studentRepo.findAll().stream().map(studentEntity -> modelMapper.map(studentEntity,Students.class))
+                .collect(Collectors.toList());
     }
     @Override
-    public StudentEntity getStudentbyid(int student_id) throws Exception{
-        Optional<StudentEntity> opt= Optional.ofNullable(studentRepo.findById(student_id));
-        if(!opt.isPresent())
-            throw new Exception("Student not found with the given id "+student_id);
-        return opt.get();
+    public Students getStudentbyid(int student_id) {
+
+        StudentEntity studentEntity= studentRepo.findById(student_id);
+        Students dep=modelMapper.map(studentEntity,Students.class);
+        return dep;
     }
     @Override
-    public StudentEntity addStudents(StudentEntity students){
-        studentRepo.save(students);
-        return students;
+    public Students addStudents(Students students){
+        StudentEntity dep=modelMapper.map(students,StudentEntity.class);
+        studentRepo.save(dep);
+        Students deps=modelMapper.map(dep,Students.class);
+        return deps;
     }
     @Override
-    public StudentEntity updateStudents(StudentEntity students){
-        studentRepo.save(students);
-        return students;
+    public Students updateStudents(Students students){
+        StudentEntity dep=modelMapper.map(students,StudentEntity.class);
+        studentRepo.save(dep);
+        Students deps=modelMapper.map(dep,Students.class);
+        return deps;
     }
     @Override
-    public StudentEntity delrecord(int student_id) throws Exception{
-        Optional<StudentEntity> g= Optional.ofNullable(studentRepo.deleteById(student_id));
-        if(!g.isPresent())
-            throw new Exception("Student not found with the given id "+student_id);
-        return g.get();
+    public Students delrecord(int student_id) {
+        StudentEntity g=studentRepo.deleteById(student_id);
+        Students deps=modelMapper.map(g,Students.class);
+        return deps;
     }
 
     @Override
-    public List<StudentEntity> getBoysOrGirls(String gender) throws Exception {
-        Optional<List<StudentEntity>> opt= Optional.ofNullable(studentRepo.getBoysOrGirls(gender));
-        if(!opt.isPresent())
-            throw new Exception("There are no "+gender+" in the records now");
-        return opt.get();
+    public List<Students> getBoysOrGirls(String gender)  {
+
+        return studentRepo.getBoysOrGirls(gender).stream().map(studentEntity -> modelMapper.map(studentEntity, Students.class))
+                          .collect(Collectors.toList());
+
     }
     @Override
-    public List<StudentEntity> getStudentsByBatch(int batch) throws Exception{
-        Optional<List<StudentEntity>> opt=Optional.ofNullable(studentRepo.getStudentsByBatch(batch));
-        if(!opt.isPresent())
-            throw new Exception("Students not found in the batch "+batch);
-        return opt.get();
+    public List<Students> getStudentsByBatch(int batch) {
+        return studentRepo.getStudentsByBatch(batch).stream().map(studentEntity -> modelMapper.map(studentEntity, Students.class))
+                .collect(Collectors.toList());
     }
 }

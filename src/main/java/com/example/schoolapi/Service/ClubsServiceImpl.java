@@ -1,43 +1,59 @@
 package com.example.schoolapi.Service;
 
 import com.example.schoolapi.Entity.ClubEntity;
+import com.example.schoolapi.Model.Clubs;
+import com.example.schoolapi.Model.Dept_Associations;
 import com.example.schoolapi.Repository.ClubRepo;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClubsServiceImpl implements ClubsService {
     @Autowired
     private ClubRepo clubRepo;
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
-    public List<ClubEntity> getClubs() {
-        return clubRepo.findAll();
+    public List<Clubs> getClubs() {
+
+        return clubRepo.findAll().stream().map(clubEntity -> modelMapper.map(clubEntity, Clubs.class))
+                .collect(Collectors.toList());
     }
     @Override
-    public ClubEntity getClubsbyid(int club_id) {
-        ClubEntity opt=clubRepo.findById(club_id);
-        return opt;
+    public Clubs getClubsbyid(int club_id) {
+        ClubEntity clubEntity= clubRepo.findById(club_id);
+        Clubs dep=modelMapper.map(clubEntity,Clubs.class);
+        return dep;
     }
     @Override
-    public ClubEntity addClubs(ClubEntity clubs){
-        clubRepo.save(clubs);
-        return clubs;
+    public Clubs addClubs(Clubs clubs){
+        ClubEntity dep=modelMapper.map(clubs,ClubEntity.class);
+        clubRepo.save(dep);
+        Clubs deps=modelMapper.map(dep,Clubs.class);
+        return deps;
     }
     @Override
-    public ClubEntity updateClubs(ClubEntity clubs){
-        clubRepo.save(clubs);
-        return clubs;
+    public Clubs updateClubs(Clubs clubs){
+        ClubEntity dep=modelMapper.map(clubs,ClubEntity.class);
+        clubRepo.save(dep);
+        Clubs deps=modelMapper.map(dep,Clubs.class);
+        return deps;
     }
     @Override
-    public ClubEntity delrecord(int club_id) {
+    public Clubs delrecord(int club_id) {
         ClubEntity g=clubRepo.deleteById(club_id);
-        return g;
+        Clubs deps=modelMapper.map(g,Clubs.class);
+        return deps;
     }
 
     @Override
-    public List<ClubEntity> getClubsOrderedAscending() {
-        return clubRepo.getClubsOrderedAscending();
+    public List<Clubs> getClubsOrderedAscending() {
+
+        return clubRepo.getClubsOrderedAscending().stream().map(clubEntity -> modelMapper.map(clubEntity, Clubs.class))
+                .collect(Collectors.toList());
     }
 }
