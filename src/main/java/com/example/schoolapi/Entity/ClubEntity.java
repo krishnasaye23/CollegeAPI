@@ -16,16 +16,15 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Data
 @Entity
 @Table(name="clubs")
 @NamedNativeQuery(name="ClubEntity.getClubsOrderedAscending",query = "select * from clubs order by club_name ASC ",resultClass = ClubEntity.class)
-public class ClubEntity extends Clubs {
-
-    @NotNull(message = "club name cannot be null")
+public class ClubEntity {
+    @Id
+    private int club_id;
     private String club_name;
-    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String president;
-    @Pattern(regexp = "^[a-zA-Z ]*$")
     private String vice_president;
     private String about;
     @Column(nullable = false,updatable=false)

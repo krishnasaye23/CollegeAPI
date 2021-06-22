@@ -1,16 +1,13 @@
 package com.example.schoolapi.Entity;
 
-import com.example.schoolapi.Model.Students;
+import com.example.schoolapi.Model.Teachers;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.time.Instant;
 import java.util.Date;
 
@@ -18,21 +15,20 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
+@Data
 @Entity
 @Table(name = "students")
 @NamedNativeQueries(value = {@NamedNativeQuery(name = "StudentEntity.getBoysOrGirls",query = "select * from students where gender=? order by student_name",resultClass = StudentEntity.class),
                              @NamedNativeQuery(name = "StudentEntity.getStudentsByBatch",query = "select * from students where batch=?",resultClass = StudentEntity.class)})
-public class StudentEntity extends Students {
-
-    @NotNull(message = "student name should not be null")
-    @Pattern(regexp = "^[a-zA-Z ]*$",message = "Name should not contain special characters")
+public class StudentEntity {
+    @Id
+    private int student_id;
     private String student_name;
     private int batch;  //year
     private String sect;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd:MM:yyyy")
     private Date dob;
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private Teachers.Gender gender;
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
     private Instant createdon;

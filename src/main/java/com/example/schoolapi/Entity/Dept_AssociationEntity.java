@@ -1,6 +1,5 @@
 package com.example.schoolapi.Entity;
 
-import com.example.schoolapi.Model.Dept_Associations;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -8,8 +7,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.time.Instant;
 import java.util.List;
 
@@ -17,16 +14,18 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Data
 @Entity
 @Table(name = "dept_association")
-public class Dept_AssociationEntity extends Dept_Associations {
-
-    @NotNull(message = "association name cannot be null")
-    @Pattern(regexp = "^[a-zA-Z ]*$")
+public class Dept_AssociationEntity {
+    @Id
+    private int asc_id;
+   // @NotNull(message = "association name cannot be null")
+    //@Pattern(regexp = "^[a-zA-Z ]*$")
     private String asc_name;
-    @Pattern(regexp = "^[a-zA-Z ]*$")
+    //@Pattern(regexp = "^[a-zA-Z ]*$")
     private String president;
-    @Pattern(regexp = "^[a-zA-Z ]*$")
+    //@Pattern(regexp = "^[a-zA-Z ]*$")
     private String vice_president;
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
@@ -34,7 +33,7 @@ public class Dept_AssociationEntity extends Dept_Associations {
     @Column(nullable = false)
     @UpdateTimestamp
     private Instant lastupdatedon;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST,targetEntity = DepartmentEntity.class)
     @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
     @JsonBackReference(value="association")
     private DepartmentEntity department;

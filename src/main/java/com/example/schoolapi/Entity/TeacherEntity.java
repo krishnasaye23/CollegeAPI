@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.sql.Date;
@@ -16,18 +17,17 @@ import java.time.Instant;
 @AllArgsConstructor
 @Getter
 @Setter
+@Data
 @Entity
 @Table(name = "Teachers")
-public class TeacherEntity extends Teachers {
-
-    @NotNull(message = "teacher name should not be null")
-    @Pattern(regexp = "^[a-zA-Z ]*$")
+public class TeacherEntity {
+    @Id
+    private int teacher_id;
     private String teacher_name;
     private String sect;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd:MM:yyyy")
     private Date dob;
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private Teachers.Gender gender;
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
     private Instant createdon;
@@ -38,6 +38,7 @@ public class TeacherEntity extends Teachers {
     @JoinColumn(name = "Dept_id",referencedColumnName = "dept_id")
     @JsonBackReference(value = "teachers")
     private DepartmentEntity department;
+
 
     public TeacherEntity(int teacher_id,String teacher_name) {
         this.teacher_id=teacher_id;
