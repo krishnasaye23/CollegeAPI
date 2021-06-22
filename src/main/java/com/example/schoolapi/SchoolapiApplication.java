@@ -1,5 +1,6 @@
 package com.example.schoolapi;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -40,10 +41,13 @@ public class SchoolapiApplication extends SpringBootServletInitializer {
 				"1.0",
 				"",
 				 new Contact("Krishna","",""),
-				"--License--",
+				"Free",
 				"",
                  Collections.emptyList()
 		);
 	}
-
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 }
