@@ -1,6 +1,6 @@
 package com.example.schoolapi.Controller;
 
-import com.example.schoolapi.Entity.ClubEntity;
+import com.example.schoolapi.Model.Clubs;
 import com.example.schoolapi.Service.ClubsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class ClubsController {
     @GetMapping("/clubs")
     public ResponseEntity<Object> getClub(){
         try {
-            List<ClubEntity> mo = clubsImpl.getClubs();
+            List<Clubs> mo = clubsImpl.getClubs();
             return new ResponseEntity<>(mo, HttpStatus.OK);
         }
         catch (Exception e){
@@ -28,7 +28,7 @@ public class ClubsController {
     @GetMapping("/clubs/{club_id}")
     public ResponseEntity<Object> getbyid(@PathVariable int club_id){
         try {
-            ClubEntity response = clubsImpl.getClubsbyid(club_id);
+            Clubs response = clubsImpl.getClubsbyid(club_id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
         catch (Exception e){
@@ -37,24 +37,24 @@ public class ClubsController {
         }
     }
     @GetMapping("/clubs/asc")
-    public ResponseEntity<List<ClubEntity>> getClubAsc(){
-        List<ClubEntity> mo=clubsImpl.getClubsOrderedAscending();
+    public ResponseEntity<List<Clubs>> getClubAsc(){
+        List<Clubs> mo=clubsImpl.getClubsOrderedAscending();
         return new ResponseEntity<>(mo, HttpStatus.OK);
     }
     @PostMapping("/clubs")
-    public ResponseEntity<ClubEntity> addClub(@Valid @RequestBody ClubEntity clubs) {
-        ClubEntity response=clubsImpl.addClubs(clubs);
+    public ResponseEntity<Clubs> addClub(@Valid @RequestBody Clubs clubs) {
+        Clubs response=clubsImpl.addClubs(clubs);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
     @PutMapping("/clubs")
-    public ResponseEntity<ClubEntity> updateClub(@Valid @RequestBody ClubEntity clubs){
-       ClubEntity response = clubsImpl.updateClubs(clubs);
+    public ResponseEntity<Clubs> updateClub(@Valid @RequestBody Clubs clubs){
+       Clubs response = clubsImpl.updateClubs(clubs);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @DeleteMapping("clubs")
     public ResponseEntity<Object> delrecord(@RequestParam("club_id") int club_id){
         try {
-            ClubEntity response = clubsImpl.delrecord(club_id);
+            Clubs response = clubsImpl.delrecord(club_id);
             return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
         }
         catch (Exception e){
